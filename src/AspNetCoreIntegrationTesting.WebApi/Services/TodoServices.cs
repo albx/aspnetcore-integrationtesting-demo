@@ -18,7 +18,9 @@ public class TodoServices
 		var todos = await context.Todos
 			.Select(t => new TodoItemModel
 			{
-
+				Id = t.Id,
+				IsComplete = t.IsComplete,
+				Title = t.Title
 			}).ToArrayAsync();
 
 		return todos;

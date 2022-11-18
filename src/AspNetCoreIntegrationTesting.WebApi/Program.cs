@@ -25,11 +25,11 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("/todos", GetAllTodosAsync);
+app.MapGet("/todos", GetAllTodosAsync).WithName("GetAllTodos");
 app.MapGet("/todos/{id}", GetTodoItemDetailAsync).WithName("TodoItemDetail");
-app.MapPost("/todos", CreateNewTodoItemAsync);
-app.MapPut("/todos/{id}", UpdateTodoItemAsync);
-app.MapDelete("/todos/{id}", DeleteTodoItemAsync);
+app.MapPost("/todos", CreateNewTodoItemAsync).WithName("CreateNewTodoItem");
+app.MapPut("/todos/{id}", UpdateTodoItemAsync).WithName("UpdateTodoItem");
+app.MapDelete("/todos/{id}", DeleteTodoItemAsync).WithName("DeleteTodoItem");
 
 app.Run();
 
