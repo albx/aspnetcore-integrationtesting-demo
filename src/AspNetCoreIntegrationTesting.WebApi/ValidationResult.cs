@@ -2,4 +2,3 @@
 {
     public static ValidationResult Success => new(true, null);
 }
-#endregion
