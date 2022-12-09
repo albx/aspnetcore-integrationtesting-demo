@@ -25,11 +25,11 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("/todos", GetAllTodosAsync).WithName("GetAllTodos");
-app.MapGet("/todos/{id}", GetTodoItemDetailAsync).WithName("TodoItemDetail");
-app.MapPost("/todos", CreateNewTodoItemAsync).WithName("CreateNewTodoItem");
-app.MapPut("/todos/{id}", UpdateTodoItemAsync).WithName("UpdateTodoItem");
-app.MapDelete("/todos/{id}", DeleteTodoItemAsync).WithName("DeleteTodoItem");
+app.MapGet("/api/todos", GetAllTodosAsync).WithName("GetAllTodos");
+app.MapGet("/api/todos/{id}", GetTodoItemDetailAsync).WithName("TodoItemDetail");
+app.MapPost("/api/todos", CreateNewTodoItemAsync).WithName("CreateNewTodoItem");
+app.MapPut("/api/todos/{id}", UpdateTodoItemAsync).WithName("UpdateTodoItem");
+app.MapDelete("/api/todos/{id}", DeleteTodoItemAsync).WithName("DeleteTodoItem");
 
 app.Run();
 
@@ -111,3 +111,5 @@ ValidationResult Validate(TodoItemModel model)
     return ValidationResult.Success;
 }
 #endregion
+
+public partial class Program { }

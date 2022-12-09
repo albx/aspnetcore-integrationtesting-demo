@@ -66,7 +66,7 @@ public class TodoServices
 
 		if (todo is null)
 		{
-			throw new ArgumentOutOfRangeException();
+			throw new ArgumentOutOfRangeException(nameof(todoItemId));
 		}
 
 		todo.Title = model.Title;
@@ -81,7 +81,7 @@ public class TodoServices
 
 		if (todo is null)
 		{
-			throw new ArgumentOutOfRangeException();
+			throw new ArgumentOutOfRangeException(nameof(todoItemId));
 		}
 
 		context.Remove(todo);
