@@ -1,30 +1,15 @@
 ﻿using AspNetCoreIntegrationTesting.WebApi.Data;
 using AspNetCoreIntegrationTesting.WebApi.Models;
-using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.EntityFrameworkCore;
 using System.Net;
 
 namespace AspNetCoreIntegrationTesting.WebApi.Test;
 
-public class TodoApiTest
+public class TodoApiTestWithCustomWebApplicationFactory
 {
     [Fact]
     public async Task Get_Todos_Should_Response_With_Ok_Status_Code()
     {
-        using var app = new WebApplicationFactory<Program>()
-            .WithWebHostBuilder(builder =>
-            {
-                builder.ConfigureServices(services =>
-                {
-                    var descriptor = services.SingleOrDefault(d => d.ServiceType == typeof(DbContextOptions<TodoContext>));
-                    if (descriptor != null)
-                    {
-                        services.Remove(descriptor);
-                    }
-
-                    services.AddDbContext<TodoContext>(options => options.UseInMemoryDatabase("Todo-InMemory-Test"));
-                });
-            });
+        using var app = new TodoApiWebApplicationFactory();
 
         var httpClient = app.CreateClient();
 
@@ -41,20 +26,7 @@ public class TodoApiTest
     [Fact]
     public async Task Post_Todos_Should_Response_With_Created_Status_Code_And_Should_Return_The_Created_Item()
     {
-        using var app = new WebApplicationFactory<Program>()
-            .WithWebHostBuilder(builder =>
-            {
-                builder.ConfigureServices(services =>
-                {
-                    var descriptor = services.SingleOrDefault(d => d.ServiceType == typeof(DbContextOptions<TodoContext>));
-                    if (descriptor != null)
-                    {
-                        services.Remove(descriptor);
-                    }
-
-                    services.AddDbContext<TodoContext>(options => options.UseInMemoryDatabase("Todo-InMemory-Test"));
-                });
-            });
+        using var app = new TodoApiWebApplicationFactory();
 
         var httpClient = app.CreateClient();
 
@@ -71,20 +43,7 @@ public class TodoApiTest
     [Fact]
     public async Task Post_Todos_Should_Response_With_Bad_Request_Status_Code_And_Should_Return_The_Validation_Errors()
     {
-        using var app = new WebApplicationFactory<Program>()
-            .WithWebHostBuilder(builder =>
-            {
-                builder.ConfigureServices(services =>
-                {
-                    var descriptor = services.SingleOrDefault(d => d.ServiceType == typeof(DbContextOptions<TodoContext>));
-                    if (descriptor != null)
-                    {
-                        services.Remove(descriptor);
-                    }
-
-                    services.AddDbContext<TodoContext>(options => options.UseInMemoryDatabase("Todo-InMemory-Test"));
-                });
-            });
+        using var app = new TodoApiWebApplicationFactory();
 
         var httpClient = app.CreateClient();
 
@@ -103,19 +62,11 @@ public class TodoApiTest
     {
         int todoItemId = 0;
 
-        using var app = new WebApplicationFactory<Program>()
+        using var app = new TodoApiWebApplicationFactory()
             .WithWebHostBuilder(builder =>
             {
                 builder.ConfigureServices(services =>
                 {
-                    var descriptor = services.SingleOrDefault(d => d.ServiceType == typeof(DbContextOptions<TodoContext>));
-                    if (descriptor != null)
-                    {
-                        services.Remove(descriptor);
-                    }
-
-                    services.AddDbContext<TodoContext>(options => options.UseInMemoryDatabase("Todo-InMemory-Test"));
-
                     using var scope = services.BuildServiceProvider().CreateScope();
                     using var context = scope.ServiceProvider.GetRequiredService<TodoContext>();
 
