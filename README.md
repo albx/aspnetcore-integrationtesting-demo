@@ -3,7 +3,7 @@
 Questo repository contiene un esempio di Integration testing in ASP.NET Core 7.
 
 ## Prerequisiti
-- .NET SDK
+- .NET 7 SDK
 - SQL Server Express
 
 ## Setup
